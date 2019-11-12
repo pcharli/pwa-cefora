@@ -1,4 +1,4 @@
-const version = "1.0.0"
+const version = "1.0.2"
 
 self.addEventListener("install", event => {
    console.log("INSTALL service worker version " + version)
@@ -34,7 +34,23 @@ self.addEventListener("activate", event => {
         {
             "url" : "favicon.ico"
         },
+        {
+            "url" : "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+        }
      ])
+
+    workbox.routing.registerRoute(
+        /(.*)\.(?:png|gif|jpg|css)$/,
+        new workbox.strategies.CacheFirst({
+            cacheName: 'design-cache',
+            plugins: [
+                new workbox.expiration.Plugin({
+                    maxEntries: 50,
+                    maxAgeSeconds: 30*24*60*60 //30 days
+                })
+            ]
+        })
+    )
  } else {
      console.log('Oooh, workbox non chargé');
  }

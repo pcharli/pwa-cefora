@@ -16,9 +16,12 @@ nav ul {
     display: flex;
     list-style: none;;
 }
-nav li {
-    margin-left: 2em;
-    border-radius : 1em;
-    padding: 1em;
-    border: 1px solid black;
+.hidden {
+    display: none;
+}
+
+.install {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
