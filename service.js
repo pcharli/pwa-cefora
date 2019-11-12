@@ -45,6 +45,9 @@ self.addEventListener("activate", event => {
         },
         {
             "url" : "main.js"
+        },
+        {
+            "url" : "https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"
         }
      ])
 
