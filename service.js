@@ -36,6 +36,15 @@ self.addEventListener("activate", event => {
         },
         {
             "url" : "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+        },
+        {
+            "url" : "sw-register.js"
+        },
+        {
+            "url" : "install.js"
+        },
+        {
+            "url" : "main.js"
         }
      ])
 
@@ -51,6 +60,19 @@ self.addEventListener("activate", event => {
             ]
         })
     )
+
+workbox.routing.registerRoute(
+    "https://api.irail.be/stations/?format=json",
+    new workbox.strategies.NetworkFirst({
+        cacheName: "api-cache",
+        plugins: [
+            new workbox.expiration.Plugin({
+                maxAgeSeconds: 30*24*60*60
+            })
+        ]
+    })
+)
+
  } else {
      console.log('Oooh, workbox non chargé');
  }
